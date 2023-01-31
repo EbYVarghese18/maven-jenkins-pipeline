@@ -26,11 +26,17 @@ pipeline {
                 script{
                     sh 'docker build -t myappsnapshot:1.0 .'
                 }
+                echo 'Build Dockerimage ends'
             }
         }
         stage('Push Docker image to Dockerhub') {
             steps {
-                echo 'Deliver'
+                script{
+                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
+                    sh 'docker login -u EbinVarghese -p ${dockerhubpwd}'
+                    }
+                    sh 'docker push myappsnapshot:1.0'
+                }
             }
         }
     }
