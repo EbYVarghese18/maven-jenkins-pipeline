@@ -12,27 +12,23 @@ pipeline {
                 '''
             }
         }
-        stage('Build') {
+        stage('Build Maven') {
             steps {
-                echo 'Build'
-                sh 'mvn -Dmaven.test.failure.ignore=true install'
-            }
-            post {
-                success {
-                    echo 'Finished'
-                }
+                echo 'Build Maven starts'
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/EbYVarghese18/maven-jenkins-pipeline']])
+                sh 'mvn clean install'
+                echo 'Build Maven Ends'
             }
         }
-        stage('Test') {
+        stage('Build Docker Image') {
             steps {
                 echo 'Test'
             }
         }
-        stage('Deliver') {
+        stage('Push Docker image to Dockerhub') {
             steps {
                 echo 'Deliver'
             }
         }
     }
 }
-
