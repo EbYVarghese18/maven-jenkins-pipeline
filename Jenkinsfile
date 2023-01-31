@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Build Dockerimage starts'
                 script{
-                    sh 'docker build -t myappsnapshot:1.0 .'
+                    sh 'docker build -t ebinvarghese/myappsnapshot:1.0 .'
                 }
                 echo 'Build Dockerimage ends'
             }
@@ -35,7 +35,7 @@ pipeline {
                     withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
                     sh 'docker login -u EbinVarghese -p ${dockerhubpwd}'
                     }
-                    sh 'docker push myappsnapshot:1.0'
+                    sh 'docker push ebinvarghese/myappsnapshot:1.0'
                 }
             }
         }
