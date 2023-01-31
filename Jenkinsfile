@@ -24,7 +24,7 @@ pipeline {
             steps {
                 echo 'Build Dockerimage starts'
                 script{
-                    sh 'docker build -t my-app-1.0-SNAPSHOT:1.0 .'
+                    sh 'docker build -t ebyvarghese18/my-app-1.0-SNAPSHOT:1.0 .'
                 }
             }
         }
