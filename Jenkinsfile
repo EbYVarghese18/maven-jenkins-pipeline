@@ -36,6 +36,7 @@ pipeline {
                     sh 'docker login -u ebinvarghese -p ${dockerhubpwd}'
                     }
                     sh 'docker push ebinvarghese/myappsnapshot:1.0'
+                    sh 'docker logout'
                 }
             }
         }
